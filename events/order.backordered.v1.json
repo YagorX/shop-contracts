@@ -1,0 +1,40 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shop-contracts/events/order.backordered.v1.json",
+  "title": "OrderBackorderedV1",
+  "allOf": [
+    {
+      "$ref": "./common-envelope.v1.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "const": "order.backordered"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "reason_code",
+            "expected_restock_at"
+          ],
+          "properties": {
+            "reason_code": {
+              "type": "string",
+              "enum": [
+                "out_of_stock",
+                "supplier_delay",
+                "inventory_mismatch"
+              ]
+            },
+            "expected_restock_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shop-contracts/events/payment.failed.v1.json",
+  "title": "PaymentFailedV1",
+  "allOf": [
+    {
+      "$ref": "./common-envelope.v1.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "const": "payment.failed"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "reason_code",
+            "reason_message",
+            "retryable"
+          ],
+          "properties": {
+            "reason_code": {
+              "type": "string",
+              "enum": [
+                "declined",
+                "timeout",
+                "provider_error",
+                "invalid_request"
+              ]
+            },
+            "reason_message": {
+              "type": "string",
+              "minLength": 1
+            },
+            "retryable": {
+              "type": "boolean"
+            },
+            "provider_tx_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

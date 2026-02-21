@@ -1,0 +1,41 @@
+﻿syntax = "proto3";
+
+package shop.catalog.v1;
+
+option go_package = "github.com/<your-github-username>/shop-contracts/gen/go/catalog/v1;catalogv1";
+
+service CatalogService {
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse);
+}
+
+message Product {
+  string id = 1;
+  string sku = 2;
+  string name = 3;
+  string description = 4;
+  double price = 5;
+  string currency = 6;
+  uint32 stock = 7;
+  bool active = 8;
+  string updated_at = 9;
+}
+
+message ListProductsRequest {
+  uint32 limit = 1;
+  uint32 offset = 2;
+  bool only_active = 3;
+}
+
+message ListProductsResponse {
+  repeated Product items = 1;
+  uint32 total = 2;
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message GetProductResponse {
+  Product product = 1;
+}

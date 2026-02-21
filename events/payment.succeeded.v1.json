@@ -1,0 +1,42 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shop-contracts/events/payment.succeeded.v1.json",
+  "title": "PaymentSucceededV1",
+  "allOf": [
+    {
+      "$ref": "./common-envelope.v1.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "const": "payment.succeeded"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "provider_tx_id",
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "provider_tx_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "amount": {
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

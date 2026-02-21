@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shop-contracts/events/order.fulfilled.v1.json",
+  "title": "OrderFulfilledV1",
+  "allOf": [
+    {
+      "$ref": "./common-envelope.v1.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "const": "order.fulfilled"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "fulfillment_id",
+            "warehouse_id",
+            "eta_days"
+          ],
+          "properties": {
+            "fulfillment_id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "warehouse_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "eta_days": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

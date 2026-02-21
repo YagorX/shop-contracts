@@ -1,0 +1,54 @@
+﻿syntax = "proto3";
+
+package shop.order.v1;
+
+option go_package = "github.com/<your-github-username>/shop-contracts/gen/go/order/v1;orderv1";
+
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+}
+
+message OrderItem {
+  string product_id = 1;
+  uint32 qty = 2;
+  double price = 3;
+}
+
+message Order {
+  string order_id = 1;
+  string customer_id = 2;
+  string currency = 3;
+  double total_amount = 4;
+  repeated OrderItem items = 5;
+  OrderStatus status = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_PENDING_PAYMENT = 1;
+  ORDER_STATUS_PAID = 2;
+  ORDER_STATUS_FULFILLED = 3;
+  ORDER_STATUS_BACKORDERED = 4;
+  ORDER_STATUS_PAYMENT_FAILED = 5;
+}
+
+message CreateOrderRequest {
+  string customer_id = 1;
+  string currency = 2;
+  repeated OrderItem items = 3;
+}
+
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+message GetOrderRequest {
+  string order_id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
