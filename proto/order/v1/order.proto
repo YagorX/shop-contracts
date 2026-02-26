@@ -1,8 +1,8 @@
 ﻿syntax = "proto3";
 
-package shop.order.v1;
+package proto.order.v1;
 
-option go_package = "github.com/<your-github-username>/shop-contracts/gen/go/order/v1;orderv1";
+option go_package = "github.com/YagorX/shop-contracts/gen/go/proto/order/v1;orderv1";
 
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);

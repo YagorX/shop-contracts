@@ -1,8 +1,8 @@
 ﻿syntax = "proto3";
 
-package shop.catalog.v1;
+package proto.catalog.v1;
 
-option go_package = "github.com/<your-github-username>/shop-contracts/gen/go/catalog/v1;catalogv1";
+option go_package = "github.com/YagorX/shop-contracts/gen/go/proto/catalog/v1;catalogv1";
 
 service CatalogService {
   rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
