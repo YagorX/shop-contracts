@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package proto.auth.v1;
+option go_package = "github.com/YagorX/shop-contracts/gen/go/proto/auth/v1;authv1";
+
+service AuthService{
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc Refresh(RefreshRequest) returns (RefreshResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string username = 3;
+}
+
+
+message RegisterResponse{
+  string user_uuid = 1;
+}
+
+message LoginRequest{
+  string email_or_name = 1;
+  string password = 2;
+  int64 app_id = 3;
+  string device_id = 4;
+}
+
+message LoginResponse{
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message IsAdminRequest{
+  string user_uuid = 1;
+}
+
+message IsAdminResponse{
+  bool is_admin = 1;
+}
+
+message ValidateTokenRequest{
+  string token = 1;
+  int64 app_id = 2;
+}
+
+message ValidateTokenResponse{
+  string user_uuid = 1;
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+  int64  app_id = 2;
+  string device_id = 3;
+}
+
+message RefreshResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message LogoutRequest {
+  string refresh_token = 1;
+  int64 app_id = 2;
+  string device_id = 3;
+}
+
+message LogoutResponse {
+  bool is_logout = 1;
+}
