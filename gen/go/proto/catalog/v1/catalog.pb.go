@@ -329,6 +329,50 @@ func (x *GetProductResponse) GetProduct() *Product {
 	return nil
 }
 
+type StreamProductsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Product       *Product               `protobuf:"bytes,1,opt,name=product,proto3" json:"product,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamProductsResponse) Reset() {
+	*x = StreamProductsResponse{}
+	mi := &file_proto_catalog_v1_catalog_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamProductsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamProductsResponse) ProtoMessage() {}
+
+func (x *StreamProductsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_catalog_v1_catalog_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamProductsResponse.ProtoReflect.Descriptor instead.
+func (*StreamProductsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_catalog_v1_catalog_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *StreamProductsResponse) GetProduct() *Product {
+	if x != nil {
+		return x.Product
+	}
+	return nil
+}
+
 var File_proto_catalog_v1_catalog_proto protoreflect.FileDescriptor
 
 const file_proto_catalog_v1_catalog_proto_rawDesc = "" +
@@ -356,11 +400,14 @@ const file_proto_catalog_v1_catalog_proto_rawDesc = "" +
 	"\x11GetProductRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"I\n" +
 	"\x12GetProductResponse\x123\n" +
-	"\aproduct\x18\x01 \x01(\v2\x19.proto.catalog.v1.ProductR\aproduct2\xc8\x01\n" +
+	"\aproduct\x18\x01 \x01(\v2\x19.proto.catalog.v1.ProductR\aproduct\"M\n" +
+	"\x16StreamProductsResponse\x123\n" +
+	"\aproduct\x18\x01 \x01(\v2\x19.proto.catalog.v1.ProductR\aproduct2\xad\x02\n" +
 	"\x0eCatalogService\x12]\n" +
 	"\fListProducts\x12%.proto.catalog.v1.ListProductsRequest\x1a&.proto.catalog.v1.ListProductsResponse\x12W\n" +
 	"\n" +
-	"GetProduct\x12#.proto.catalog.v1.GetProductRequest\x1a$.proto.catalog.v1.GetProductResponseBDZBgithub.com/YagorX/shop-contracts/gen/go/proto/catalog/v1;catalogv1b\x06proto3"
+	"GetProduct\x12#.proto.catalog.v1.GetProductRequest\x1a$.proto.catalog.v1.GetProductResponse\x12c\n" +
+	"\x0eStreamProducts\x12%.proto.catalog.v1.ListProductsRequest\x1a(.proto.catalog.v1.StreamProductsResponse0\x01BDZBgithub.com/YagorX/shop-contracts/gen/go/proto/catalog/v1;catalogv1b\x06proto3"
 
 var (
 	file_proto_catalog_v1_catalog_proto_rawDescOnce sync.Once
@@ -374,26 +421,30 @@ func file_proto_catalog_v1_catalog_proto_rawDescGZIP() []byte {
 	return file_proto_catalog_v1_catalog_proto_rawDescData
 }
 
-var file_proto_catalog_v1_catalog_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_catalog_v1_catalog_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_catalog_v1_catalog_proto_goTypes = []any{
-	(*Product)(nil),              // 0: proto.catalog.v1.Product
-	(*ListProductsRequest)(nil),  // 1: proto.catalog.v1.ListProductsRequest
-	(*ListProductsResponse)(nil), // 2: proto.catalog.v1.ListProductsResponse
-	(*GetProductRequest)(nil),    // 3: proto.catalog.v1.GetProductRequest
-	(*GetProductResponse)(nil),   // 4: proto.catalog.v1.GetProductResponse
+	(*Product)(nil),                // 0: proto.catalog.v1.Product
+	(*ListProductsRequest)(nil),    // 1: proto.catalog.v1.ListProductsRequest
+	(*ListProductsResponse)(nil),   // 2: proto.catalog.v1.ListProductsResponse
+	(*GetProductRequest)(nil),      // 3: proto.catalog.v1.GetProductRequest
+	(*GetProductResponse)(nil),     // 4: proto.catalog.v1.GetProductResponse
+	(*StreamProductsResponse)(nil), // 5: proto.catalog.v1.StreamProductsResponse
 }
 var file_proto_catalog_v1_catalog_proto_depIdxs = []int32{
 	0, // 0: proto.catalog.v1.ListProductsResponse.items:type_name -> proto.catalog.v1.Product
 	0, // 1: proto.catalog.v1.GetProductResponse.product:type_name -> proto.catalog.v1.Product
-	1, // 2: proto.catalog.v1.CatalogService.ListProducts:input_type -> proto.catalog.v1.ListProductsRequest
-	3, // 3: proto.catalog.v1.CatalogService.GetProduct:input_type -> proto.catalog.v1.GetProductRequest
-	2, // 4: proto.catalog.v1.CatalogService.ListProducts:output_type -> proto.catalog.v1.ListProductsResponse
-	4, // 5: proto.catalog.v1.CatalogService.GetProduct:output_type -> proto.catalog.v1.GetProductResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 2: proto.catalog.v1.StreamProductsResponse.product:type_name -> proto.catalog.v1.Product
+	1, // 3: proto.catalog.v1.CatalogService.ListProducts:input_type -> proto.catalog.v1.ListProductsRequest
+	3, // 4: proto.catalog.v1.CatalogService.GetProduct:input_type -> proto.catalog.v1.GetProductRequest
+	1, // 5: proto.catalog.v1.CatalogService.StreamProducts:input_type -> proto.catalog.v1.ListProductsRequest
+	2, // 6: proto.catalog.v1.CatalogService.ListProducts:output_type -> proto.catalog.v1.ListProductsResponse
+	4, // 7: proto.catalog.v1.CatalogService.GetProduct:output_type -> proto.catalog.v1.GetProductResponse
+	5, // 8: proto.catalog.v1.CatalogService.StreamProducts:output_type -> proto.catalog.v1.StreamProductsResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_catalog_v1_catalog_proto_init() }
@@ -407,7 +458,7 @@ func file_proto_catalog_v1_catalog_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_catalog_v1_catalog_proto_rawDesc), len(file_proto_catalog_v1_catalog_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

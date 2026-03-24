@@ -7,6 +7,8 @@ option go_package = "github.com/YagorX/shop-contracts/gen/go/proto/catalog/v1;ca
 service CatalogService {
   rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
   rpc GetProduct(GetProductRequest) returns (GetProductResponse);
+
+  rpc StreamProducts(ListProductsRequest) returns (stream StreamProductsResponse);
 }
 
 message Product {
@@ -37,5 +39,9 @@ message GetProductRequest {
 }
 
 message GetProductResponse {
+  Product product = 1;
+}
+
+message StreamProductsResponse {
   Product product = 1;
 }
