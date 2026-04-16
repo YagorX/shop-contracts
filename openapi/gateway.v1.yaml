@@ -25,8 +25,12 @@ paths:
     $ref: './gateway.v1/paths/admin_log_level.yaml'
   /products:
     $ref: './gateway.v1/paths/products.yaml'
+  /products/stream:
+    $ref: './gateway.v1/paths/products_stream.yaml'
   /products/{id}:
     $ref: './gateway.v1/paths/products_by_id.yaml'
+  /status:
+    $ref: './gateway.v1/paths/status.yaml'
   /auth/register:
     $ref: './gateway.v1/paths/auth_register.yaml'
   /auth/login:

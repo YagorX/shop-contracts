@@ -1,0 +1,15 @@
+get:
+  tags: [System]
+  summary: Render service status page
+  operationId: statusPage
+  responses:
+    '200':
+      description: HTML status page
+      content:
+        text/html:
+          schema:
+            type: string
+    '405':
+      description: Method not allowed
+    '500':
+      description: Failed to render status page
