@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package proto.cart.v1;
+
+option go_package = "github.com/YagorX/shop-contracts/gen/go/proto/cart/v1;cartv1";
+import "google/protobuf/timestamp.proto";
+// AddItem - user_id из metadata
+message AddItemRequest {
+  string product_id = 1;
+  int32  quantity   = 2;
+  int64 price_snapshot = 3;
+}
+message AddItemResponse {}  // просто подтверждение
+
+message RemoveItemRequest {
+  string product_id = 1;
+}
+message RemoveItemResponse {}
+
+message UpdateItemRequest {
+  string product_id = 1;
+  int32  quantity   = 2;
+}
+message UpdateItemResponse {}
+
+// GetCart - возвращает только ID и quantity, без цен
+message GetCartRequest {}
+message CartItem {
+  string product_id = 1;
+  int32  quantity   = 2;
+  int64 price_snapshot = 3;
+  google.protobuf.Timestamp added_at = 4;
+}
+message GetCartResponse {
+  repeated CartItem items = 1;
+}
+
+message ClearCartRequest {}
+message ClearCartResponse {}
+
+service CartService {
+  rpc AddItem(AddItemRequest)       returns (AddItemResponse);
+  rpc RemoveItem(RemoveItemRequest) returns (RemoveItemResponse);
+  rpc UpdateItem(UpdateItemRequest) returns (UpdateItemResponse);
+  rpc GetCart(GetCartRequest)       returns (GetCartResponse);
+  rpc ClearCart(ClearCartRequest)   returns (ClearCartResponse);
+}
