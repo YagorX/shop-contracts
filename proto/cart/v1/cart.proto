@@ -30,6 +30,7 @@ message CartItem {
   int32  quantity   = 2;
   int64 price_snapshot = 3;
   google.protobuf.Timestamp added_at = 4;
+  bool unavailable = 5; // если товар недоступен (удален или закончился), чтобы фронт мог отобразить это пользователю
 }
 message GetCartResponse {
   repeated CartItem items = 1;

@@ -330,6 +330,7 @@ type CartItem struct {
 	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	PriceSnapshot int64                  `protobuf:"varint,3,opt,name=price_snapshot,json=priceSnapshot,proto3" json:"price_snapshot,omitempty"`
 	AddedAt       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=added_at,json=addedAt,proto3" json:"added_at,omitempty"`
+	Unavailable   bool                   `protobuf:"varint,5,opt,name=unavailable,proto3" json:"unavailable,omitempty"` // если товар недоступен (удален или закончился), чтобы фронт мог отобразить это пользователю
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -390,6 +391,13 @@ func (x *CartItem) GetAddedAt() *timestamppb.Timestamp {
 		return x.AddedAt
 	}
 	return nil
+}
+
+func (x *CartItem) GetUnavailable() bool {
+	if x != nil {
+		return x.Unavailable
+	}
+	return false
 }
 
 type GetCartResponse struct {
@@ -528,13 +536,14 @@ const file_proto_cart_v1_cart_proto_rawDesc = "" +
 	"product_id\x18\x01 \x01(\tR\tproductId\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\"\x14\n" +
 	"\x12UpdateItemResponse\"\x10\n" +
-	"\x0eGetCartRequest\"\xa3\x01\n" +
+	"\x0eGetCartRequest\"\xc5\x01\n" +
 	"\bCartItem\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\tR\tproductId\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\x12%\n" +
 	"\x0eprice_snapshot\x18\x03 \x01(\x03R\rpriceSnapshot\x125\n" +
-	"\badded_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\aaddedAt\"@\n" +
+	"\badded_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\aaddedAt\x12 \n" +
+	"\vunavailable\x18\x05 \x01(\bR\vunavailable\"@\n" +
 	"\x0fGetCartResponse\x12-\n" +
 	"\x05items\x18\x01 \x03(\v2\x17.proto.cart.v1.CartItemR\x05items\"\x12\n" +
 	"\x10ClearCartRequest\"\x13\n" +
