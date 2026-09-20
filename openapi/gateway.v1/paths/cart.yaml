@@ -1,0 +1,27 @@
+get:
+  tags: [Cart]
+  summary: Get current user's cart
+  operationId: getCart
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '../../gateway.v1.yaml#/components/parameters/XAppIdHeader'
+  responses:
+    '200':
+      description: Cart contents
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/Cart'
+    '401':
+      description: Missing or invalid bearer token
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
+    '404':
+      description: Cart not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'

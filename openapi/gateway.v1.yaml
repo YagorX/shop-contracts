@@ -11,6 +11,7 @@ servers:
 tags:
   - name: System
   - name: Catalog
+  - name: Cart
   - name: Auth
   - name: Admin
 
@@ -29,6 +30,16 @@ paths:
     $ref: './gateway.v1/paths/products_stream.yaml'
   /products/{id}:
     $ref: './gateway.v1/paths/products_by_id.yaml'
+  /cart:
+    $ref: './gateway.v1/paths/cart.yaml'
+  /cart/items:
+    $ref: './gateway.v1/paths/cart_items.yaml'
+  /cart/items/update:
+    $ref: './gateway.v1/paths/cart_items_update.yaml'
+  /cart/items/remove:
+    $ref: './gateway.v1/paths/cart_items_remove.yaml'
+  /cart/clear:
+    $ref: './gateway.v1/paths/cart_clear.yaml'
   /status:
     $ref: './gateway.v1/paths/status.yaml'
   /auth/register:
@@ -151,6 +162,85 @@ components:
         count:
           type: integer
           example: 2
+
+    OkResponse:
+      type: object
+      required: [ok]
+      properties:
+        ok:
+          type: boolean
+          example: true
+
+    AddItemRequest:
+      type: object
+      required: [product_id, quantity]
+      properties:
+        product_id:
+          type: string
+          example: prod-001
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+          example: 2
+
+    UpdateItemRequest:
+      type: object
+      required: [product_id, quantity]
+      properties:
+        product_id:
+          type: string
+          example: prod-001
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+          example: 3
+
+    RemoveItemRequest:
+      type: object
+      required: [product_id]
+      properties:
+        product_id:
+          type: string
+          example: prod-001
+
+    CartItem:
+      type: object
+      required: [product_id, quantity, price_snapshot_kopecks, added_at]
+      properties:
+        product_id:
+          type: string
+          example: prod-001
+        quantity:
+          type: integer
+          format: int32
+          example: 2
+        price_snapshot_kopecks:
+          type: integer
+          format: int64
+          example: 199900
+        added_at:
+          type: string
+          format: date-time
+
+    Cart:
+      type: object
+      required: [user_id, items, created_at, updated_at]
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
 
     RegisterRequest:
       type: object
