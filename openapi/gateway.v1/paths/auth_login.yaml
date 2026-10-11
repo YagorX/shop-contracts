@@ -27,9 +27,15 @@ post:
         application/json:
           schema:
             $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
+    '429':
+      $ref: '../../gateway.v1.yaml#/components/responses/TooManyRequests'
     '500':
       description: Internal error
       content:
         application/json:
           schema:
             $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
+    '503':
+      $ref: '../../gateway.v1.yaml#/components/responses/ServiceUnavailable'
+    '504':
+      $ref: '../../gateway.v1.yaml#/components/responses/GatewayTimeout'
