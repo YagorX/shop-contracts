@@ -2,6 +2,10 @@ get:
   tags: [Admin]
   summary: Get current log level
   operationId: getLogLevel
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '../../gateway.v1.yaml#/components/parameters/XAppIdHeader'
   responses:
     '200':
       description: Current log level
@@ -9,14 +13,33 @@ get:
         application/json:
           schema:
             $ref: '../../gateway.v1.yaml#/components/schemas/LogLevelResponse'
+    '401':
+      description: Missing or invalid token
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
+    '403':
+      description: Authenticated user is not an administrator
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
     '500':
       description: Logger is not initialized
+    '503':
+      $ref: '../../gateway.v1.yaml#/components/responses/ServiceUnavailable'
+    '504':
+      $ref: '../../gateway.v1.yaml#/components/responses/GatewayTimeout'
 
 post:
   tags: [Admin]
   summary: Change current log level
   operationId: setLogLevel
+  security:
+    - bearerAuth: []
   parameters:
+    - $ref: '../../gateway.v1.yaml#/components/parameters/XAppIdHeader'
     - in: query
       name: level
       required: true
@@ -32,5 +55,21 @@ post:
             $ref: '../../gateway.v1.yaml#/components/schemas/LogLevelResponse'
     '400':
       description: Invalid log level
+    '401':
+      description: Missing or invalid token
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
+    '403':
+      description: Authenticated user is not an administrator
+      content:
+        application/json:
+          schema:
+            $ref: '../../gateway.v1.yaml#/components/schemas/ErrorEnvelope'
     '500':
       description: Logger is not initialized
+    '503':
+      $ref: '../../gateway.v1.yaml#/components/responses/ServiceUnavailable'
+    '504':
+      $ref: '../../gateway.v1.yaml#/components/responses/GatewayTimeout'
